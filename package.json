@@ -1,0 +1,13 @@
+{
+  "name": "tutorial-fipe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AntunesDev/tutorial-fipe.git",
+  "author": "Lucas A. <lucas.antunes355@gmail.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "express": "^4.21.0",
+    "express-async-handler": "^1.2.0"
+  }
+}
