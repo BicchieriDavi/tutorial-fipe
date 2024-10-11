@@ -36,6 +36,7 @@ tipo_veiculo.addEventListener("change", function () {
   marca.innerHTML = '<option value="">Selecione a Marca</option>';
   modelo.innerHTML = '<option value="">Selecione o Modelo</option>';
   versao.innerHTML = '<option value="">Selecione a Versão</option>';
+  resultado.style.display = "none";
 
   axios.get(`fipe/${valor}`).then((resposta) => {
     const data = resposta.data;
@@ -53,6 +54,7 @@ marca.addEventListener("change", function () {
 
   modelo.innerHTML = '<option value="">Selecione o Modelo</option>';
   versao.innerHTML = '<option value="">Selecione a Versão</option>';
+  resultado.style.display = "none";
 
   axios.get(`fipe/${tipo_veiculo.value}/${valor}`).then((resposta) => {
     const data = resposta.data;
@@ -69,6 +71,7 @@ modelo.addEventListener("change", function () {
   const valor = modelo.value;
 
   versao.innerHTML = '<option value="">Selecione a Versão</option>';
+  resultado.style.display = "none";
 
   axios
     .get(`fipe/${tipo_veiculo.value}/${marca.value}/${valor}`)
@@ -86,14 +89,18 @@ modelo.addEventListener("change", function () {
 formulario.addEventListener("submit", function (evento) {
   evento.preventDefault();
   const valor = versao.value;
-  resultado.style.display = "block";
+
   resultado.style.textAlign = "center";
   axios
     .get(`fipe/${tipo_veiculo.value}/${marca.value}/${modelo.value}/${valor}`)
     .then((resposta) => {
       const data = resposta.data;
-
-      resultado.innerHTML = `${data.price}`;
+      resultado.style.display = "block";
+      if (data.price == undefined) {
+        resultado.innerHTML = "Selecione a versão";
+      } else {
+        resultado.innerHTML = `${data.price}`;
+      }
     });
 
   return false;
